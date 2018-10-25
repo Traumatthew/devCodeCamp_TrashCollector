@@ -16,6 +16,7 @@ namespace TrashCollector.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -80,7 +81,7 @@ namespace TrashCollector.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("RedirectLogin");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -89,6 +90,22 @@ namespace TrashCollector.Controllers
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+            }
+        }
+
+        public ActionResult RedirectLogin(string returnUrl)
+        {
+            if (User.IsInRole(RoleNames.Customer))
+            {
+                return RedirectToAction("Index", "Customers");
+            }
+            else if (User.IsInRole(RoleNames.Employee))
+            {
+                return RedirectToAction("Index", "Employees");
+            }
+            else
+            {
+                return RedirectToLocal(returnUrl);
             }
         }
 
@@ -152,44 +169,68 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, firstName = model.firstName, lastName = model.lastName, phone = model.phone, address = model.address};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
 
                     //Temp code
-                    var rolestore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    var roleManager = new RoleManager<IdentityRole>(rolestore);
-                    await roleManager.CreateAsync(new IdentityRole(RoleNames.Customer));
-                    await UserManager.AddToRoleAsync(user.Id, RoleNames.Customer);
-
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    if(model.accountType == "Cust")
+                    {
+                        var rolestore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                        var roleManager = new RoleManager<IdentityRole>(rolestore);
+                        await roleManager.CreateAsync(new IdentityRole(RoleNames.Customer));
+                        await UserManager.AddToRoleAsync(user.Id, RoleNames.Customer);
+                        CreateCustomer(model);
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToAction("Index", "Customers");
+                    }
+                    else if(model.accountType == "Emp")
+                    {
+                        var rolestore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                        var roleManager = new RoleManager<IdentityRole>(rolestore);
+                        await roleManager.CreateAsync(new IdentityRole(RoleNames.Employee));
+                        await UserManager.AddToRoleAsync(user.Id, RoleNames.Employee);
+                        CreateEmployee(model);
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToAction("Index", "Employees");
+                    }
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    var w = user.Roles;
-                    if (User.IsInRole(RoleNames.Customer))
-                    {
-                        return RedirectToAction("Index", "Customers");
-                    }
-                    else if (User.IsInRole(RoleNames.Employee))
-                    {
-                        return RedirectToAction("Index", "Employees");
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Customers");
-                    }
-                    
+                   
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        public void CreateEmployee(RegisterViewModel model)
+        {
+            Employee emp = new Employee();
+            emp.FirstName = model.firstName;
+            emp.LastName = model.lastName;
+            emp.Phone = model.phone;
+            emp.Address = model.address;
+            emp.Email = model.Email;
+            db.Employees.Add(emp);
+            db.SaveChanges();
+        }
+
+        public void CreateCustomer(RegisterViewModel model)
+        {
+            Customer cust = new Customer();
+            cust.FirstName = model.firstName;
+            cust.LastName = model.lastName;
+            cust.Phone = model.phone;
+            cust.Address = model.address;
+            cust.Email = model.Email;
+            db.Customers.Add(cust);
+            db.SaveChanges();
         }
 
         //

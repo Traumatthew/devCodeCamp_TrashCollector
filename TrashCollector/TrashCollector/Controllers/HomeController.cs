@@ -12,6 +12,7 @@ namespace TrashCollector.Controllers
       
         public ActionResult Index()
         {
+            
             return View();
         }
 

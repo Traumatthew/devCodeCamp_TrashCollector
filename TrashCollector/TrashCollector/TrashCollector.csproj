@@ -218,6 +218,18 @@
     <Compile Include="Migrations\201810251517109_seed users.Designer.cs">
       <DependentUpon>201810251517109_seed users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810251819249_add customer columns.cs" />
+    <Compile Include="Migrations\201810251819249_add customer columns.Designer.cs">
+      <DependentUpon>201810251819249_add customer columns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810251854364_changed phonenumber to phone.cs" />
+    <Compile Include="Migrations\201810251854364_changed phonenumber to phone.Designer.cs">
+      <DependentUpon>201810251854364_changed phonenumber to phone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810251926414_added account type.cs" />
+    <Compile Include="Migrations\201810251926414_added account type.Designer.cs">
+      <DependentUpon>201810251926414_added account type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -326,6 +338,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810251517109_seed users.resx">
       <DependentUpon>201810251517109_seed users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810251819249_add customer columns.resx">
+      <DependentUpon>201810251819249_add customer columns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810251854364_changed phonenumber to phone.resx">
+      <DependentUpon>201810251854364_changed phonenumber to phone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810251926414_added account type.resx">
+      <DependentUpon>201810251926414_added account type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
