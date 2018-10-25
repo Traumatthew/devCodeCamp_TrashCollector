@@ -6,8 +6,10 @@ using System.Web.Mvc;
 
 namespace TrashCollector.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
+      
         public ActionResult Index()
         {
             return View();

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TrashCollector.Models;
@@ -155,15 +156,34 @@ namespace TrashCollector.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    //Temp code
+                    var rolestore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(rolestore);
+                    await roleManager.CreateAsync(new IdentityRole(RoleNames.Customer));
+                    await UserManager.AddToRoleAsync(user.Id, RoleNames.Customer);
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    var w = user.Roles;
+                    if (User.IsInRole(RoleNames.Customer))
+                    {
+                        return RedirectToAction("Index", "Customers");
+                    }
+                    else if (User.IsInRole(RoleNames.Employee))
+                    {
+                        return RedirectToAction("Index", "Employees");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Customers");
+                    }
+                    
                 }
                 AddErrors(result);
             }
