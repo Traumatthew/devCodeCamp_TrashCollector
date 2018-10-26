@@ -17,7 +17,9 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            var u = HttpContext.User.Identity.Name;
+            var cust = db.Customers.Where(x => x.Email == u).FirstOrDefault();
+            return View(cust);
         }
 
         // GET: Customers/Details/5

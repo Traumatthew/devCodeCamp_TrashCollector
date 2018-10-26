@@ -26,6 +26,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li>@Html.ActionLink("Profile", "Index", "Customers")</li>
+                            <li>@Html.ActionLink("Special Pickups", "Create")</li>
                         </ul>
                         @Html.Partial("_LoginPartial")
                     </div>
@@ -72,9 +73,6 @@
                 </div>
             }
         }
-
-
-
     </div>
     <div class="container body-content">
         @RenderBody()
