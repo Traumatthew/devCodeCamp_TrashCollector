@@ -20,8 +20,14 @@ namespace TrashCollector.Models
         [Display(Name = "Phone Number")]
         public string phone { get; set; }
         [Required]
-        [Display(Name = "Address")]
-        public string address { get; set; }
+        [Display(Name = "Street")]
+        public string street { get; set; }
+        [Required]
+        [Display(Name = "State")]
+        public string state { get; set; }
+        [Required]
+        [Display(Name = "Zip")]
+        public string zip { get; set; }
 
         public string accountType { get; set; }
 
@@ -48,6 +54,7 @@ namespace TrashCollector.Models
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<CustomerAccountDetails> CustomerAccountDetails { get; set; }
        
     }
 }

@@ -17,9 +17,46 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public ActionResult Index()
         {
+            var CAD = db.CustomerAccountDetails.ToList();
             var u = HttpContext.User.Identity.Name;
             var cust = db.Customers.Where(x => x.Email == u).FirstOrDefault();
-            return View(cust);
+            bool found = false;
+            foreach (var item in CAD)
+            {
+                if(item.CustomerId == cust.ID)
+                {
+                    found = true;
+                }
+            }
+            if(found == true)
+            {
+                return View(cust);
+            }
+            else
+            {
+                return RedirectToAction("Initial");
+            }
+        }
+
+        public ActionResult Initial()
+        {
+            CustomerAccountDetails account = new CustomerAccountDetails();
+            return View(account);
+        }
+
+        [HttpPost]
+        public ActionResult Initial(CustomerAccountDetails account)
+        {
+            CustomerAccountDetails newEntry = new CustomerAccountDetails();
+            var u = HttpContext.User.Identity.Name;
+            var cust = db.Customers.Where(x => x.Email == u).FirstOrDefault();
+            newEntry.CurrentlySuspended = false;
+            newEntry.CustomerId = cust.ID;
+            newEntry.MoneyOwed = 0;
+            newEntry.WeeklyPickUpDay = account.WeeklyPickUpDay;
+            db.CustomerAccountDetails.Add(newEntry);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Customers/Details/5

@@ -4,9 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using static TrashCollector.Models.RouteConstraint;
-using static TrashCollector.Models.RoleNames;
-using TrashCollector.Models;
+
 
 namespace TrashCollector
 {
