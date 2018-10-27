@@ -12,25 +12,28 @@ namespace TrashCollector.Controllers
 {
     public class CustomersController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        public ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Customers
         public ActionResult Index()
         {
             var CAD = db.CustomerAccountDetails.ToList();
             var u = HttpContext.User.Identity.Name;
-            var cust = db.Customers.Where(x => x.Email == u).FirstOrDefault();
+            var customer = db.Customers.Where(x => x.Email == u).FirstOrDefault();
             bool found = false;
             foreach (var item in CAD)
             {
-                if(item.CustomerId == cust.ID)
+                if(item.CustomerId == customer.ID)
                 {
                     found = true;
                 }
             }
             if(found == true)
             {
-                return View(cust);
+                var pickups = db.PickUpRequests.Where(x => x.CustomerId == customer.ID).ToList();
+                var accountDet = db.CustomerAccountDetails.Where(x => x.CustomerId == customer.ID).FirstOrDefault();
+                CustomerAndAccountViewModel viewmodel = new CustomerAndAccountViewModel() { cust = customer, account = accountDet, pickups = pickups };
+                return View(viewmodel);
             }
             else
             {

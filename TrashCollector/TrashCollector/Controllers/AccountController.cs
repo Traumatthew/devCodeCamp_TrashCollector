@@ -184,6 +184,8 @@ namespace TrashCollector.Controllers
                         await UserManager.AddToRoleAsync(user.Id, RoleNames.Customer);
                         CreateCustomer(model);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        
+
                         return RedirectToAction("Index", "Customers");
                     }
                     else if(model.accountType == "Emp")
@@ -194,6 +196,8 @@ namespace TrashCollector.Controllers
                         await UserManager.AddToRoleAsync(user.Id, RoleNames.Employee);
                         CreateEmployee(model);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        
+
                         return RedirectToAction("Index", "Employees");
                     }
 

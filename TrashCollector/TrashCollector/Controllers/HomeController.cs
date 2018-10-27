@@ -24,8 +24,7 @@ namespace TrashCollector.Controllers
             else
             {
                 return View();
-            }
-            
+            } 
         }
 
         public ActionResult About()
@@ -34,7 +33,7 @@ namespace TrashCollector.Controllers
 
             return View();
         }
-
+    
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

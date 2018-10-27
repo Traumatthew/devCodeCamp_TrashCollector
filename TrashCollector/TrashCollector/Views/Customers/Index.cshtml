@@ -1,12 +1,99 @@
-﻿@model TrashCollector.Models.Customer
+﻿@model TrashCollector.Models.CustomerAndAccountViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Welcome @Html.DisplayFor(model => model.FirstName)
-            @Html.DisplayFor(model => model.LastName)</h2>
+<div class="container mt-3 mb-3">
+    <h2>
+        Welcome @Html.DisplayFor(model => model.cust.FirstName)
+        @Html.DisplayFor(model => model.cust.LastName)
+    </h2>
+</div>
+<div class="container">
+    <div class="text-center">
+        <h2>
+                Account Summary
+        </h2>
+        <br />
+    </div>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 border-right border-left ml-auto">
+            <label>
+                Address:
+            </label>
+            <p>
+                @Model.cust.Street,  @Model.cust.State,  @Model.cust.Zip<br />
+            </p>
+            <label>
+                Pick Up Day:
+            </label>
+            <p>
+                @Model.account.WeeklyPickUpDay
+            </p>
+            <label>
+                Current Bill:
+            </label>
+            <p>
+                $ @Model.account.MoneyOwed
+            </p>
+        </div>
+        <div class="col-md-3 text-center">
+            <label>
+                Scheduled Special Pickups
+            </label>
+            <p>
+                <ul>
+                    @if (Model.pickups.Count > 0)
+                    {
 
-<p>
-    
-</p>
+                        foreach (var item in Model.pickups)
+                        {
+                            if (item.CustomerId == Model.cust.ID)
+                            {
+                                <li>
+                                    Date: item.Date
+                                </li>
+                                <li>
+                                    Time: item.Time
+                                </li>
+                                <li>
+                                    Completed: item.complete
+                                </li>
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        <li>
+                            No Pickups Scheduled
+                        </li>
+                    }
+                </ul>
+            </p>
+        </div>
+        <div class="col-md-3 text-center border-right border-left mr-auto">
+            <label>
+                Scheduled Suspensions
+            </label>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 ml-auto text-center">
+            <input type="button" class=" btn btn-outline-primary btn-lg ml-auto" value="Edit Profile" onclick="location.href=@Url.Action("Create", "Customers")" />
+        </div>
+        <div class="col-md-3 text-center">
+            <input type="button" class="btn btn-outline-primary btn-lg" value="Add Pickup" onclick="location.href=@Url.Action("Create", "Customers")" />
+        </div>
+        <div class="col-md-3 mr-auto text-center">
+            <input type="button" class="btn btn-outline-primary btn-lg" value="Suspend Service" onclick="location.href=@Url.Action("Create", "Customers")" />
+        </div>
+    </div>
+</div>
+

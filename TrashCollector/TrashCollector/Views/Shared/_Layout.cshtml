@@ -10,25 +10,24 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-expand-md navbar-dark bg-dark navbar-fixed-top">
         @{
             if (User.IsInRole("Customer"))
             {
-                <div class="container">
+                <div class="container text-light">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         </button>
-                        @Html.ActionLink("Application name", "Index", "Customer", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Trash Collector", "Index", "Customer", new { area = "" }, new { @class = "navbar-brand" })
                     </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Profile", "Index", "Customers")</li>
-                            <li>@Html.ActionLink("Special Pickups", "Create")</li>
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item pr-3">@Html.ActionLink("Profile", "Index", "Customers", null, new {@class="text-light" })</li>
+                            <li class="nav-item">@Html.ActionLink("Special Pickups", "Create", null, new { @class = "text-light" })</li>
                         </ul>
+                        <span>
                         @Html.Partial("_LoginPartial")
+                        </span>
                     </div>
                 </div>
             }
@@ -36,18 +35,17 @@
             {
                 <div class="container">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        @Html.ActionLink("Application name", "Index", "Customer", new { area = "" }, new { @class = "navbar-brand" })
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+                        @Html.ActionLink("Trash Collector", "Index", "Employees", new { area = "" }, new { @class = "navbar-brand" })
                     </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Profile", "Index", "Employees")</li>
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item pr-3">@Html.ActionLink("Profile", "Index", "Employees", null, new { @class = "text-light" })</li>
+                            <li class="nav-item">@Html.ActionLink("Special Pickups", "Create", null, new { @class = "text-light" })</li>
                         </ul>
-                        @Html.Partial("_LoginPartial")
+                        <span>
+                            @Html.Partial("_LoginPartial")
+                        </span>
                     </div>
                 </div>
             }
@@ -55,18 +53,14 @@
             {
                 <div class="container">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+                        @Html.ActionLink("Trash Collector", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav  mr-auto">
+                            <li class="nav-item pr-3">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "text-light" })</li>
+                            <li class="nav-item pr-3">@Html.ActionLink("About", "About", "Home", null, new { @class = "text-light" })</li>
+                            <li class="nav-item pr-3">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "text-light" })</li>
                         </ul>
                         @Html.Partial("_LoginPartial")
                     </div>
