@@ -35,12 +35,12 @@ namespace TrashCollector.Controllers
             bool found = false;
             foreach (var item in CAD)
             {
-                if(item.CustomerId == customer.ID)
+                if (item.CustomerId == customer.ID)
                 {
                     found = true;
                 }
             }
-            if(found == true)
+            if (found == true)
             {
                 var susp = db.Suspensions.Where(x => x.CustomerId == customer.ID).ToList();
                 var pickups = db.PickUpRequests.Where(x => x.CustomerId == customer.ID).ToList();
@@ -84,13 +84,13 @@ namespace TrashCollector.Controllers
         [HttpPost]
         public ActionResult CreateSpecialPickup(FormCollection form)
         {
-           
+
             string date = form["Date"];
-       
-            
+
+
             DateTime dvalue;
-          
-            if(DateTime.TryParse(date, out(dvalue)) == true)
+
+            if (DateTime.TryParse(date, out (dvalue)) == true)
             {
                 dvalue = DateTime.Parse(date);
             }
@@ -101,14 +101,14 @@ namespace TrashCollector.Controllers
             }
 
             TempData["pickup"] = form;
-            return RedirectToAction("ConfirmPickUpRequest", new { Form = form});
+            return RedirectToAction("ConfirmPickUpRequest", new { Form = form });
         }
 
 
         public ActionResult ConfirmPickUpRequest()
         {
             FormCollection Form = (FormCollection)TempData["pickup"];
-            int fee = 100;   
+            int fee = 100;
             PickUpRequests pickup = new PickUpRequests();
             string date = Form["Date"];
             DateTime dvalue = DateTime.Parse(date);
@@ -174,6 +174,52 @@ namespace TrashCollector.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult CreateSuspension()
+        {
+            Suspensions susp = new Suspensions();
+            return View(susp);
+        }
+
+        [HttpPost]
+        public ActionResult CreateSuspension(Suspensions susp)
+        {
+         
+            TempData["suspension"] = susp;
+            return RedirectToAction("ConfirmSuspension");
+        }
+
+        public ActionResult ConfirmSuspension()
+        {
+            Suspensions susp = (Suspensions)TempData["suspension"];
+            TempData["suspension"] = susp;
+            return View(susp);
+        }
+
+        [HttpPost]
+        public ActionResult ConfirmSuspension(FormCollection form)
+        {
+            Suspensions susp = (Suspensions)TempData["suspension"];
+            var cust = GetCustomer();
+            susp.CustomerId = cust.ID;
+            db.Suspensions.Add(susp);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CancelSuspension(int suspID)
+        {
+            var susp = db.Suspensions.Where(x => x.SupsensionId == suspID).FirstOrDefault();
+            return View(susp);
+        }
+
+        [HttpPost]
+        public ActionResult CancelSuspension(int suspID, FormCollection form)
+        {
+            var susp = db.Suspensions.Where(x => x.SupsensionId == suspID).FirstOrDefault();
+            db.Suspensions.Remove(susp);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         public ActionResult Details(int? id)
         {
             if (id == null)

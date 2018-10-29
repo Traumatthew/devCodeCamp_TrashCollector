@@ -257,6 +257,10 @@
     <Compile Include="Migrations\201810291409126_converted datetime to datetime2.Designer.cs">
       <DependentUpon>201810291409126_converted datetime to datetime2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810291549252_changed date types to datetime2.cs" />
+    <Compile Include="Migrations\201810291549252_changed date types to datetime2.Designer.cs">
+      <DependentUpon>201810291549252_changed date types to datetime2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -383,6 +387,9 @@
     <Content Include="Views\Customers\ConfirmPickUpRequest.cshtml" />
     <Content Include="Views\Customers\DeletePickup.cshtml" />
     <Content Include="Views\Customers\EditProfile.cshtml" />
+    <Content Include="Views\Customers\CreateSuspension.cshtml" />
+    <Content Include="Views\Customers\ConfirmSuspension.cshtml" />
+    <Content Include="Views\Customers\CancelSuspension.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -431,6 +438,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810291409126_converted datetime to datetime2.resx">
       <DependentUpon>201810291409126_converted datetime to datetime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291549252_changed date types to datetime2.resx">
+      <DependentUpon>201810291549252_changed date types to datetime2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

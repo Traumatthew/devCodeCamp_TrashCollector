@@ -74,13 +74,13 @@
                 </ul>
             </p>
         </div>
-        <div class="col-md-3 text-center border-right border-left mr-auto">
-            <label class="font-weight-bold">
+        <div class="col-md-3  border-right border-left mr-auto">
+            <label class="font-weight-bold text-center">
                 Scheduled Suspensions
             </label>
             <p>
-                <ul class="ml-auto mr-auto">
-                    @if (Model.pickups.Count > 0)
+                <ul class="mr-auto">
+                    @if (Model.suspensions.Count > 0)
                     {
 
                         foreach (var item in Model.suspensions)
@@ -88,8 +88,9 @@
                             if (item.CustomerId == Model.cust.ID)
                             {
                                 <li>
-                                    Start Date: @item.StartDate.ToString()<br />
-                                    End Date: @item.EndDate.ToString()
+                                    Start Date: @item.StartDate.ToShortDateString()<br />
+                                    End Date: @item.EndDate.ToShortDateString()<br />
+                                    @Html.ActionLink("Cancel", "CancelSuspension", new { suspID = item.SupsensionId})<br />
                                 </li>
                             }
                         }
@@ -114,7 +115,7 @@
             <input type="button" class="btn btn-outline-primary btn-lg" value="Add Pickup" onclick="location.href='@Url.Action("CreateSpecialPickup", "Customers")'" />
         </div>
         <div class="col-md-3 mr-auto text-center">
-            <input type="button" class="btn btn-outline-primary btn-lg" value="Suspend Service" onclick="location.href=@Url.Action("Create", "Customers")" />
+            <input type="button" class="btn btn-outline-primary btn-lg" value="Suspend Service" onclick="location.href='@Url.Action("CreateSuspension", "Customers")'" />
         </div>
     </div>
 </div>
