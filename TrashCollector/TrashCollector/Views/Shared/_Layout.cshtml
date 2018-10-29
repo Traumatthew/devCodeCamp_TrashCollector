@@ -23,7 +23,6 @@
                     <div class="navbar-collapse collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav mr-auto">
                             <li class="nav-item pr-3">@Html.ActionLink("Profile", "Index", "Customers", null, new {@class="text-light" })</li>
-                            <li class="nav-item">@Html.ActionLink("Special Pickups", "Create", null, new { @class = "text-light" })</li>
                         </ul>
                         <span>
                         @Html.Partial("_LoginPartial")
@@ -40,8 +39,8 @@
                     </div>
                     <div class="navbar-collapse collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav mr-auto">
-                            <li class="nav-item pr-3">@Html.ActionLink("Profile", "Index", "Employees", null, new { @class = "text-light" })</li>
-                            <li class="nav-item">@Html.ActionLink("Special Pickups", "Create", null, new { @class = "text-light" })</li>
+                            <li class="nav-item pr-3">@Html.ActionLink("Pickup", "Index", "Employees", null, new { @class = "text-light" })</li>
+                            <li class="nav-item">@Html.ActionLink("Customer Accounts", "CustomerAccounts", "Employees", null, new { @class = "text-light" })</li>
                         </ul>
                         <span>
                             @Html.Partial("_LoginPartial")

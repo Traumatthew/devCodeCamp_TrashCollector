@@ -49,20 +49,29 @@
                 <ul class="mr-auto">
                     @if (Model.pickups.Count > 0)
                     {
-
+                        bool notempty = false;
                         foreach (var item in Model.pickups)
                         {
-                            if (item.CustomerId == Model.cust.ID)
+                            if (item.complete == false)
                             {
-                                <li>
-                                    Date: @item.Date.ToShortDateString()<br />
-                                    Time: @item.Time<br />
-                                    Description: @item.notes<br />
-                                    @Html.ActionLink("Delete", "DeletePickup", new {  id = item.PickUpId})
-                                </li>
-                                
-                               
+                                if (item.CustomerId == Model.cust.ID)
+                                {
+                                    notempty = true;
+                                    <li>
+                                        Date: @item.Date.ToShortDateString()<br />
+                                        Time: @item.Time<br />
+                                        Description: @item.notes<br />
+                                        @Html.ActionLink("Delete", "DeletePickup", new { id = item.PickUpId })
+                                    </li>
+                                }
                             }
+
+                        }
+                        if(notempty == false)
+                        {
+                            <li>
+                                No Pickups Scheduled
+                            </li>
                         }
                     }
                     else

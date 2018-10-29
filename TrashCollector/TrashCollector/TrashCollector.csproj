@@ -269,6 +269,10 @@
     <Compile Include="Migrations\201810291702184_added city to employee.Designer.cs">
       <DependentUpon>201810291702184_added city to employee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810292029505_added attributes to the pickrequests table.cs" />
+    <Compile Include="Migrations\201810292029505_added attributes to the pickrequests table.Designer.cs">
+      <DependentUpon>201810292029505_added attributes to the pickrequests table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -395,6 +399,8 @@
     <Content Include="Views\Customers\CreateSuspension.cshtml" />
     <Content Include="Views\Customers\ConfirmSuspension.cshtml" />
     <Content Include="Views\Customers\CancelSuspension.cshtml" />
+    <Content Include="Views\Employees\PickupDetail.cshtml" />
+    <Content Include="Views\Employees\CustomerAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -452,6 +458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810291702184_added city to employee.resx">
       <DependentUpon>201810291702184_added city to employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810292029505_added attributes to the pickrequests table.resx">
+      <DependentUpon>201810292029505_added attributes to the pickrequests table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

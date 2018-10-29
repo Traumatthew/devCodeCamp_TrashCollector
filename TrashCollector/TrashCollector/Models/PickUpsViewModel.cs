@@ -7,6 +7,7 @@ namespace TrashCollector.Models
 {
     public class PickUpsViewModel
     {
+        public List<Customer> customers { get; set; }
         public List<Customer> standardPickups { get; set; }
         public List<PickUpRequests> specialPickups { get; set; }
     }

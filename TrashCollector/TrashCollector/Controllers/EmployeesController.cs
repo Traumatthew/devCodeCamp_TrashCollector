@@ -14,13 +14,27 @@ namespace TrashCollector.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Employees
+        private bool CheckSuspensions(int CustId)
+        {
+            var suspensions = db.Suspensions.Where(x => x.CustomerId == CustId).ToList();
+            bool suspended = false;
+            foreach(var item in suspensions)
+            {
+                if(DateTime.Today < item.EndDate && DateTime.Today > item.StartDate)
+                {
+                    suspended = true;
+                }
+            }
+            return suspended;
+        }
+
+
         public ActionResult Index()
         {
-
             var employee = db.Employees.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
             var customers = db.Customers.Where(x => x.Zip == employee.Zip).ToList();
             var custAcc = db.CustomerAccountDetails.Where(x => x.WeeklyPickUpDay == DateTime.Today.DayOfWeek.ToString()).ToList();
+            List<Customer> customersL = db.Customers.ToList();
             PickUpsViewModel view = new PickUpsViewModel();
             List<Customer> results = new List<Customer>();
             foreach (var account in custAcc)
@@ -29,22 +43,44 @@ namespace TrashCollector.Controllers
                 {
                     if (cust.ID == account.CustomerId)
                     {
-                        results.Add(cust);
+                        bool check = CheckSuspensions(cust.ID);
+                        if(check == false)
+                        {
+                            results.Add(cust);
+                        }
                     }
                 }
             }
             var special = db.PickUpRequests.Where(x => x.Date == DateTime.Today).ToList();
             view.standardPickups = results;
             view.specialPickups = special;
+            view.customers = customersL;
             return View(view);
         }
 
      
 
-        public ActionResult CustomerDetail (int id)
+        public ActionResult PickupDetail (int id)
         {
+            var pickup = db.PickUpRequests.Where(x => x.PickUpId == id).FirstOrDefault();        
+            return View(pickup);
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult PickupDetail(int id, FormCollection form)
+        {
+            var pickup = db.PickUpRequests.Where(x => x.PickUpId == id).FirstOrDefault();
+            var cust = db.CustomerAccountDetails.Where(x => x.CustomerId == pickup.CustomerId).FirstOrDefault();
+            pickup.complete = true;
+            cust.MoneyOwed += pickup.Fee;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CustomerAccounts()
+        {
+            var customers = db.Customers.ToList();
+            return View(customers);
         }
         // GET: Employees/Details/5
         public ActionResult Details(int? id)

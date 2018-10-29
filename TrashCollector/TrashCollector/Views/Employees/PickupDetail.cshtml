@@ -1,0 +1,68 @@
+﻿@model TrashCollector.Models.PickUpRequests
+
+@{
+    ViewBag.Title = "PickupDetail";
+}
+
+<h2>Pickup Detail</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        <h4>Mark this pickup as complete?</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Place)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Place)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Time)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Time)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Fee)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Fee)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.notes)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.notes)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Complete" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+
+
+
+

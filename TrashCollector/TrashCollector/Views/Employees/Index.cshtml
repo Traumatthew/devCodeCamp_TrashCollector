@@ -26,7 +26,7 @@
             @Html.DisplayName("Phone Number")
         </th>
         <th>
-            @Html.DisplayName("Location");
+            @Html.DisplayName("Location")
         </th>
 
         <th></th>
@@ -79,6 +79,9 @@
         <th>
             @Html.DisplayName("Notes")
         </th>
+        <th>
+            @Html.DisplayName("Completed")
+        </th>
 
         <th></th>
     </tr>
@@ -94,14 +97,14 @@
         </td>
         <td>
             @{
-                var name = Model.standardPickups.Where(x => x.ID == item.CustomerId).Select(x => x.FirstName).Single().ToString();
-                var lname = Model.standardPickups.Where(x => x.ID == item.CustomerId).Select(x => x.LastName).Single().ToString();
+                string name = Model.customers.Where(x => x.ID == item.CustomerId).Select(x => x.FirstName).Single().ToString();
+                string lname = Model.customers.Where(x => x.ID == item.CustomerId).Select(x => x.LastName).Single().ToString();
             }
             @name  @lname
         </td>
         <td>
             @{
-                var phone = Model.standardPickups.Where(x => x.ID == item.CustomerId).Select(x => x.Phone).Single().ToString();
+                var phone = Model.customers.Where(x => x.ID == item.CustomerId).Select(x => x.Phone).Single().ToString();
             }
             @phone
         </td>
@@ -109,18 +112,13 @@
             @Html.DisplayFor(modelItem => item.notes)
         </td>
         <td>
-            @if (item.complete == false)
-            {
-                @Html.CheckBox("Completed", false)
-
-            }
-            else
-            {
-                @Html.DisplayFor(x => item.complete)
-            }
+            @Html.DisplayFor(modelitem => item.complete)
         </td>
         <td>
-            <input type="button" class=" btn btn-outline-primary ml-auto" value="Complete" onclick="location.href='@Url.Action("Complete", "Employees", new { id = item.PickUpId})'" />
+            @if (item.complete == false)
+            {
+                <input type="button" class=" btn btn-outline-primary ml-auto" value="Complete" onclick="location.href='@Url.Action("PickupDetail", "Employees", new { id = item.PickUpId})'" />
+            }
         </td>
     </tr>
     }
