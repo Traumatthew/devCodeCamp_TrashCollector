@@ -1,0 +1,82 @@
+﻿@model TrashCollector.Models.PickUpRequests
+
+@{
+    ViewBag.Title = "CreateSpecialPickup";
+}
+
+<h2>CreateSpecialPickup</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>PickUpRequests</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+   
+        <div class="form-group">
+            @Html.HiddenFor(model => model.PickUpId, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Date, "Date :", new { style = "display:inline;", @class="control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Date, "", new {@class = "text-danger" })
+            </div>
+            @ViewBag.faileddate
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Times", new List<SelectListItem>
+           {
+               new SelectListItem{Text = "09:00", Value = "09:00 AM" },
+               new SelectListItem{Text = "10:00", Value = "10:00 AM" },
+               new SelectListItem{Text = "11:00", Value = "11:00 AM" },
+               new SelectListItem{Text = "12:00", Value = "12:00 PM" },
+               new SelectListItem{Text = "01:00", Value = "01:00 PM" },
+               new SelectListItem{Text = "02:00", Value = "02:00 PM" },
+               new SelectListItem{Text = "03:00", Value = "03:00 PM" },
+               new SelectListItem{Text = "04:00", Value = "04:00 PM" },
+               new SelectListItem{Text = "05:00", Value = "05:00 PM" }
+           })
+            </div>
+            @ViewBag.TimeMessage
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

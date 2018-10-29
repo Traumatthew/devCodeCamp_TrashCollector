@@ -22,31 +22,31 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 border-right border-left ml-auto">
-            <label>
+            <label class="font-weight-bold">
                 Address:
             </label>
             <p>
                 @Model.cust.Street,  @Model.cust.State,  @Model.cust.Zip<br />
             </p>
-            <label>
+            <label class="font-weight-bold">
                 Pick Up Day:
             </label>
             <p>
                 @Model.account.WeeklyPickUpDay
             </p>
-            <label>
+            <label class="font-weight-bold">
                 Current Bill:
             </label>
             <p>
                 $ @Model.account.MoneyOwed
             </p>
         </div>
-        <div class="col-md-3 text-center">
-            <label>
+        <div class="col-md-3">
+            <label class="font-weight-bold text-center">
                 Scheduled Special Pickups
             </label>
             <p>
-                <ul>
+                <ul class="mr-auto">
                     @if (Model.pickups.Count > 0)
                     {
 
@@ -55,17 +55,15 @@
                             if (item.CustomerId == Model.cust.ID)
                             {
                                 <li>
-                                    Date: item.Date
+                                    Date: @item.Date.ToShortDateString()<br />
+                                    Time: @item.Time<br />
+                                    Description: @item.notes<br />
+                                    @Html.ActionLink("Delete", "DeletePickup", new {  id = item.PickUpId})
                                 </li>
-                                <li>
-                                    Time: item.Time
-                                </li>
-                                <li>
-                                    Completed: item.complete
-                                </li>
+                                
+                               
                             }
                         }
-
                     }
                     else
                     {
@@ -77,19 +75,43 @@
             </p>
         </div>
         <div class="col-md-3 text-center border-right border-left mr-auto">
-            <label>
+            <label class="font-weight-bold">
                 Scheduled Suspensions
             </label>
+            <p>
+                <ul class="ml-auto mr-auto">
+                    @if (Model.pickups.Count > 0)
+                    {
+
+                        foreach (var item in Model.suspensions)
+                        {
+                            if (item.CustomerId == Model.cust.ID)
+                            {
+                                <li>
+                                    Start Date: @item.StartDate.ToString()<br />
+                                    End Date: @item.EndDate.ToString()
+                                </li>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <li>
+                            No Suspensions Scheduled
+                        </li>
+                    }
+                </ul>
+            </p>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-md-3 ml-auto text-center">
-            <input type="button" class=" btn btn-outline-primary btn-lg ml-auto" value="Edit Profile" onclick="location.href=@Url.Action("Create", "Customers")" />
+            <input type="button" class=" btn btn-outline-primary btn-lg ml-auto" value="Edit Profile" onclick="location.href='@Url.Action("EditProfile", "Customers")'" />
         </div>
         <div class="col-md-3 text-center">
-            <input type="button" class="btn btn-outline-primary btn-lg" value="Add Pickup" onclick="location.href=@Url.Action("Create", "Customers")" />
+            <input type="button" class="btn btn-outline-primary btn-lg" value="Add Pickup" onclick="location.href='@Url.Action("CreateSpecialPickup", "Customers")'" />
         </div>
         <div class="col-md-3 mr-auto text-center">
             <input type="button" class="btn btn-outline-primary btn-lg" value="Suspend Service" onclick="location.href=@Url.Action("Create", "Customers")" />

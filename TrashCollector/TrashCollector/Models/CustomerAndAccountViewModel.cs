@@ -10,5 +10,6 @@ namespace TrashCollector.Models
         public Customer cust { get; set; }
         public CustomerAccountDetails account { get; set; }
         public List<PickUpRequests> pickups { get; set; }
+        public List<Suspensions> suspensions { get; set; }
     }
 }

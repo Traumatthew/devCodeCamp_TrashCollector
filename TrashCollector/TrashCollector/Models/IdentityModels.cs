@@ -56,6 +56,7 @@ namespace TrashCollector.Models
         public DbSet<Employee> Employees { get; set; }
         public DbSet<CustomerAccountDetails> CustomerAccountDetails { get; set; }
         public DbSet<PickUpRequests> PickUpRequests { get; set; }
+        public DbSet<Suspensions> Suspensions { get; set; }
        
     }
 }

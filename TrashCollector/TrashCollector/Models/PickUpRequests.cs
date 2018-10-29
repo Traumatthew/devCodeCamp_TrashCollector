@@ -16,10 +16,14 @@ namespace TrashCollector.Models
         public int CustomerId { get; set; }
         public Customer Customers { get; set; }
         public string Place { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Date Of Pickup is Required")]
+        [Column(TypeName = "datetime2")]
         public DateTime Date { get; set; }
         public string Time { get; set; }
         public double Fee { get; set; }
         public bool complete { get; set; }
+        [Display(Name = "Description of items to be picked up:")]
         public string notes { get; set; }
     }
 }

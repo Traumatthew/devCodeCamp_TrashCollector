@@ -7,19 +7,15 @@ using System.Web;
 
 namespace TrashCollector.Models
 {
-    public class CustomerAccountDetails
+    public class Suspensions
     {
         [Key]
-        public int CustomerAccountId { get; set; }
-
+        public int SupsensionId { get; set; }
         [ForeignKey("Customers")]
         [Display(Name = "Customer Id")]
         public int CustomerId { get; set; }
         public Customer Customers { get; set; }
- 
-        public double MoneyOwed { get; set; }
-        [Display(Name = "Weekly Pickup Day")]
-        public string WeeklyPickUpDay { get; set; }
-        public bool CurrentlySuspended { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }
