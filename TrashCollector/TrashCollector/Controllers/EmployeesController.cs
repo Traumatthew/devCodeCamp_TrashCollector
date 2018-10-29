@@ -17,9 +17,35 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+
+            var employee = db.Employees.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+            var customers = db.Customers.Where(x => x.Zip == employee.Zip).ToList();
+            var custAcc = db.CustomerAccountDetails.Where(x => x.WeeklyPickUpDay == DateTime.Today.DayOfWeek.ToString()).ToList();
+            PickUpsViewModel view = new PickUpsViewModel();
+            List<Customer> results = new List<Customer>();
+            foreach (var account in custAcc)
+            {
+                foreach (var cust in customers)
+                {
+                    if (cust.ID == account.CustomerId)
+                    {
+                        results.Add(cust);
+                    }
+                }
+            }
+            var special = db.PickUpRequests.Where(x => x.Date == DateTime.Today).ToList();
+            view.standardPickups = results;
+            view.specialPickups = special;
+            return View(view);
         }
 
+     
+
+        public ActionResult CustomerDetail (int id)
+        {
+
+            return View();
+        }
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {

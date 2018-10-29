@@ -23,6 +23,9 @@ namespace TrashCollector.Models
         [Display(Name = "Street")]
         public string street { get; set; }
         [Required]
+        [Display(Name = "City")]
+        public string city { get; set; }
+        [Required]
         [Display(Name = "State")]
         public string state { get; set; }
         [Required]

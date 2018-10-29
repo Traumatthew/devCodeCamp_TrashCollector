@@ -81,6 +81,9 @@ namespace TrashCollector.Models
         [Display(Name = "State")]
         public string state { get; set; }
         [Required]
+        [Display(Name = "City")]
+        public string city { get; set; }
+        [Required]
         [Display(Name = "Zip")]
         public string zip { get; set; }
         [Required]

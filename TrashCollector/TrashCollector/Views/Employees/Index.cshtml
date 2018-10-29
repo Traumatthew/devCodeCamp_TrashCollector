@@ -1,57 +1,129 @@
-﻿@model IEnumerable<TrashCollector.Models.Employee>
+﻿@model TrashCollector.Models.PickUpsViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Today's Pickups</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+<label>
+    Standard Pickups
+</label>
 <table class="table">
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayName("First Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayName("Last Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayName("Email")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Phone)
+            @Html.DisplayName("Phone Number")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayName("Location");
         </th>
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.standardPickups)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street) @Html.DisplayFor(ModelItem => item.City) @Html.DisplayFor(ModelItem => item.State) @Html.DisplayFor(modelItem => item.Zip)
+            </td>
+
+
+        </tr>
+    }
 
 </table>
+
+<hr />
+<label>
+    Special Pickups
+</label>
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayName("Place")
+        </th>
+        <th>
+            @Html.DisplayName("Time")
+        </th>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Phone Number")
+        </th>
+        <th>
+            @Html.DisplayName("Notes")
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.specialPickups)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Place)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @{
+                var name = Model.standardPickups.Where(x => x.ID == item.CustomerId).Select(x => x.FirstName).Single().ToString();
+                var lname = Model.standardPickups.Where(x => x.ID == item.CustomerId).Select(x => x.LastName).Single().ToString();
+            }
+            @name  @lname
+        </td>
+        <td>
+            @{
+                var phone = Model.standardPickups.Where(x => x.ID == item.CustomerId).Select(x => x.Phone).Single().ToString();
+            }
+            @phone
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.notes)
+        </td>
+        <td>
+            @if (item.complete == false)
+            {
+                @Html.CheckBox("Completed", false)
+
+            }
+            else
+            {
+                @Html.DisplayFor(x => item.complete)
+            }
+        </td>
+        <td>
+            <input type="button" class=" btn btn-outline-primary ml-auto" value="Complete" onclick="location.href='@Url.Action("Complete", "Employees", new { id = item.PickUpId})'" />
+        </td>
+    </tr>
+    }
+</table>
+
+   

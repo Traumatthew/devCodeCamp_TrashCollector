@@ -261,6 +261,14 @@
     <Compile Include="Migrations\201810291549252_changed date types to datetime2.Designer.cs">
       <DependentUpon>201810291549252_changed date types to datetime2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810291659328_added city to customer table.cs" />
+    <Compile Include="Migrations\201810291659328_added city to customer table.Designer.cs">
+      <DependentUpon>201810291659328_added city to customer table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810291702184_added city to employee.cs" />
+    <Compile Include="Migrations\201810291702184_added city to employee.Designer.cs">
+      <DependentUpon>201810291702184_added city to employee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -270,6 +278,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PickUpRequests.cs" />
+    <Compile Include="Models\PickUpsViewModel.cs" />
     <Compile Include="Models\RoleNames.cs" />
     <Compile Include="Models\Suspensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -363,10 +372,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Customers\Create.cshtml" />
-    <Content Include="Views\Customers\Delete.cshtml" />
-    <Content Include="Views\Customers\Details.cshtml" />
-    <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
@@ -441,6 +446,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810291549252_changed date types to datetime2.resx">
       <DependentUpon>201810291549252_changed date types to datetime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291659328_added city to customer table.resx">
+      <DependentUpon>201810291659328_added city to customer table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291702184_added city to employee.resx">
+      <DependentUpon>201810291702184_added city to employee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

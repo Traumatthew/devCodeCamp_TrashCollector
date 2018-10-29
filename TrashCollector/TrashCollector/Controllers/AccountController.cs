@@ -170,7 +170,7 @@ namespace TrashCollector.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, firstName = model.firstName, lastName = model.lastName,
-                    phone = model.phone, street = model.street, state = model.state, zip = model.zip};
+                    phone = model.phone, street = model.street, state = model.state, zip = model.zip, city = model.city};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -222,6 +222,7 @@ namespace TrashCollector.Controllers
             emp.Phone = model.phone;
             emp.Street = model.street;
             emp.State = model.state;
+            emp.City = model.city;
             emp.Zip = model.zip;
             emp.Email = model.Email;
             db.Employees.Add(emp);
