@@ -280,6 +280,7 @@
     <Compile Include="Models\CustomerAndAccountViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Key.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PickUpRequests.cs" />
     <Compile Include="Models\PickUpsViewModel.cs" />
