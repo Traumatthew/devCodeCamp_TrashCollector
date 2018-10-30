@@ -79,8 +79,46 @@ namespace TrashCollector.Controllers
 
         public ActionResult CustomerAccounts()
         {
+            var accounts = db.CustomerAccountDetails.ToList();
             var customers = db.Customers.ToList();
-            return View(customers);
+            CustomerAndAccountViewModel view = new CustomerAndAccountViewModel();
+            view.accounts = accounts;
+            view.customers = customers;
+            return View(view);
+        }
+
+        [HttpPost]
+        public ActionResult CustomerAccounts(string[] days)
+        {
+            var accounts = db.CustomerAccountDetails.ToList();
+            var customers = db.Customers.ToList();
+            List<CustomerAccountDetails> accResults = new List<CustomerAccountDetails>();
+            List<Customer> custResults = new List<Customer>();
+            foreach(var day in days)
+            {
+                foreach(var acc in accounts)
+                {
+                    if(acc.WeeklyPickUpDay == day)
+                    {
+                        accResults.Add(acc);
+                    }
+                }
+            }
+
+            foreach(var cust in customers)
+            {
+                foreach(var acc in accResults)
+                {
+                    if(acc.CustomerId == cust.ID)
+                    {
+                        custResults.Add(cust);
+                    }
+                }
+            }
+
+            CustomerAndAccountViewModel view = new CustomerAndAccountViewModel() { customers = custResults, accounts = accResults };
+
+            return View(view);
         }
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
