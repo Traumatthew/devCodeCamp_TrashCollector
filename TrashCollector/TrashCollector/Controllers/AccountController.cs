@@ -183,7 +183,11 @@ namespace TrashCollector.Controllers
                         await roleManager.CreateAsync(new IdentityRole(RoleNames.Customer));
                         await UserManager.AddToRoleAsync(user.Id, RoleNames.Customer);
                         CreateCustomer(model);
+                        var newCust = db.Customers.Where(x => x.Email == model.Email).FirstOrDefault();
+                        SetCoords(newCust);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                      
+
                         
 
                         return RedirectToAction("Index", "Customers");
@@ -195,6 +199,8 @@ namespace TrashCollector.Controllers
                         await roleManager.CreateAsync(new IdentityRole(RoleNames.Employee));
                         await UserManager.AddToRoleAsync(user.Id, RoleNames.Employee);
                         CreateEmployee(model);
+                        var newEmp = db.Employees.Where(x => x.Email == model.Email).FirstOrDefault();
+                        SetCoords(newEmp);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         
 
@@ -229,6 +235,26 @@ namespace TrashCollector.Controllers
             db.SaveChanges();
         }
 
+        public void SetCoords(Customer cust)
+        {
+            GeoLocations geo = new GeoLocations();
+            var coords = geo.GetLatandLong(cust);
+            geo.Lat = coords["lat"];
+            geo.Long = coords["lng"];
+            geo.CustomerId = cust.ID;
+            db.GeoLocations.Add(geo);
+            db.SaveChanges();
+        }
+
+        public void SetCoords(Employee emp)
+        {
+            GeoLocations geo = new GeoLocations();
+            var coords = geo.GetLatandLong(emp);
+            emp.lat = coords["lat"];
+            emp.lng = coords["lng"];
+            db.SaveChanges();
+        }
+
         public void CreateCustomer(RegisterViewModel model)
         {
             Customer cust = new Customer();
@@ -236,8 +262,9 @@ namespace TrashCollector.Controllers
             cust.LastName = model.lastName;
             cust.Phone = model.phone;
             cust.Street = model.street;
+            cust.City = model.city;
             cust.State = model.state;
-            cust.Zip = model.state;
+            cust.Zip = model.zip;
             cust.Email = model.Email;
             db.Customers.Add(cust);
             db.SaveChanges();

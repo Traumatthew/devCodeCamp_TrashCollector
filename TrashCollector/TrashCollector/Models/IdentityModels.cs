@@ -60,6 +60,7 @@ namespace TrashCollector.Models
         public DbSet<CustomerAccountDetails> CustomerAccountDetails { get; set; }
         public DbSet<PickUpRequests> PickUpRequests { get; set; }
         public DbSet<Suspensions> Suspensions { get; set; }
+        public DbSet<GeoLocations> GeoLocations { get; set; }
        
     }
 }

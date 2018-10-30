@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace TrashCollector.Models
@@ -13,5 +16,7 @@ namespace TrashCollector.Models
         public List<Suspensions> suspensions { get; set; }
         public List<Customer> customers { get; set; }
         public List<CustomerAccountDetails> accounts { get; set; }
+        public string key = Key.GKey;
+        public string srcKey = "https://maps.googleapis.com/maps/api/js?libraries=places&key=" + Key.GKey + "&callback=initMap";
     }
 }

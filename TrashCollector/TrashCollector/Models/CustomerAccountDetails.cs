@@ -21,5 +21,7 @@ namespace TrashCollector.Models
         [Display(Name = "Weekly Pickup Day")]
         public string WeeklyPickUpDay { get; set; }
         public bool CurrentlySuspended { get; set; }
+
+  
     }
 }

@@ -273,12 +273,21 @@
     <Compile Include="Migrations\201810292029505_added attributes to the pickrequests table.Designer.cs">
       <DependentUpon>201810292029505_added attributes to the pickrequests table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810301846018_added geolocations table.cs" />
+    <Compile Include="Migrations\201810301846018_added geolocations table.Designer.cs">
+      <DependentUpon>201810301846018_added geolocations table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810301925511_added lat and long attribute to employees.cs" />
+    <Compile Include="Migrations\201810301925511_added lat and long attribute to employees.Designer.cs">
+      <DependentUpon>201810301925511_added lat and long attribute to employees.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAccountDetails.cs" />
     <Compile Include="Models\CustomerAndAccountViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\GeoLocations.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Key.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -462,6 +471,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810292029505_added attributes to the pickrequests table.resx">
       <DependentUpon>201810292029505_added attributes to the pickrequests table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810301846018_added geolocations table.resx">
+      <DependentUpon>201810301846018_added geolocations table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810301925511_added lat and long attribute to employees.resx">
+      <DependentUpon>201810301925511_added lat and long attribute to employees.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
