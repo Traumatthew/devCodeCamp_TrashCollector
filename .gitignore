@@ -59,6 +59,7 @@ StyleCopReport.xml
 
 # Files built by Visual Studio
 *db.lock
+*Key.cs
 *_i.c
 *_p.c
 *_i.h
