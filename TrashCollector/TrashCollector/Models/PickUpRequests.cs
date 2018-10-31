@@ -28,4 +28,6 @@ namespace TrashCollector.Models
         [Display(Name = "Description of items to be picked up:")]
         public string notes { get; set; }
     }
+
+
 }

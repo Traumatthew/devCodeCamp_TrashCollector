@@ -76,9 +76,19 @@ namespace TrashCollector.Controllers
 
         public ActionResult CreateSpecialPickup()
         {
-            PickUpRequests pickup = new PickUpRequests();
-            ViewBag.TimeMessage = "";
-            return View(pickup);
+            if (TempData["pickup"] == null)
+            {
+                PickUpRequests pickup = new PickUpRequests();
+                ViewBag.TimeMessage = "";
+                return View(pickup);
+            }
+            else
+            {
+                PickUpRequests pickup = (PickUpRequests)TempData["pickup"];
+                ViewBag.TimeMessage = "";
+                return View(pickup);
+            }
+            
         }
 
         [HttpPost]
@@ -130,9 +140,20 @@ namespace TrashCollector.Controllers
         public ActionResult ConfirmPickUpRequest(PickUpRequests p)
         {
             PickUpRequests pickup = (PickUpRequests)TempData["pickup"];
-            db.PickUpRequests.Add(pickup);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            var today = DateTime.Today;
+            if(pickup.Date > today.AddDays(-1))
+            {
+                db.PickUpRequests.Add(pickup);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["pickup"] = pickup;
+                return RedirectToAction("CreateSpecialPickup");
+            }
+               
+            
         }
 
         public ActionResult DeletePickup(int id)

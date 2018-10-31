@@ -172,6 +172,7 @@ namespace TrashCollector.Controllers
             CustomerAndAccountViewModel view = new CustomerAndAccountViewModel() { customers = custResults, accounts = accResults, };
             finalView.CustViewModel = view;
             finalView.emp = employee;
+            TempData["employee"] = employee;
             return View(finalView);
         }
         // GET: Employees/Details/5
