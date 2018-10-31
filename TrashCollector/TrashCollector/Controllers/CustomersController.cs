@@ -155,6 +155,8 @@ namespace TrashCollector.Controllers
             var customer = GetCustomer();
             var acc = GetCustomerAccount();
             CustomerAndAccountViewModel vm = new CustomerAndAccountViewModel() { cust = customer, account = acc };
+            vm.cust = customer;
+            vm.account = acc;
             return View(vm);
         }
 

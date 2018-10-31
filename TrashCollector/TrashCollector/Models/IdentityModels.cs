@@ -61,6 +61,7 @@ namespace TrashCollector.Models
         public DbSet<PickUpRequests> PickUpRequests { get; set; }
         public DbSet<Suspensions> Suspensions { get; set; }
         public DbSet<GeoLocations> GeoLocations { get; set; }
+        public DbSet<WeeklyPickups> WeeklyPickups { get; set; }
        
     }
 }

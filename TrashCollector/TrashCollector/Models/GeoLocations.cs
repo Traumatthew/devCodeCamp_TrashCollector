@@ -10,6 +10,7 @@ namespace TrashCollector.Models
 {
     public class GeoLocations
     {
+        public ApplicationDbContext db = new ApplicationDbContext();
         [Key]
         public int GeoID { get; set; }
         [ForeignKey("Customers")]
@@ -38,5 +39,6 @@ namespace TrashCollector.Models
             return items.results[0].geometry.location;
         }
 
+        
     }
 }

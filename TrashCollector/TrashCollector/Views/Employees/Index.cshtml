@@ -35,25 +35,27 @@
     <tbody>
         @foreach (var item in Model.standardPickups)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Street) @Html.DisplayFor(ModelItem => item.City) @Html.DisplayFor(ModelItem => item.State) @Html.DisplayFor(modelItem => item.Zip)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street) @Html.DisplayFor(ModelItem => item.City) @Html.DisplayFor(ModelItem => item.State) @Html.DisplayFor(modelItem => item.Zip)
+            </td>
+            <td>
+                <input type="button" class=" btn btn-outline-primary ml-auto" value="Complete" onclick="location.href='@Url.Action("PickupDetail", "Employees", new { id = item.ID})'" />
+            </td>
 
-
-            </tr>
+        </tr>
         }
     </tbody>
 

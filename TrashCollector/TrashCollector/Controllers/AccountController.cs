@@ -239,10 +239,8 @@ namespace TrashCollector.Controllers
         {
             GeoLocations geo = new GeoLocations();
             var coords = geo.GetLatandLong(cust);
-            geo.Lat = coords["lat"];
-            geo.Long = coords["lng"];
-            geo.CustomerId = cust.ID;
-            db.GeoLocations.Add(geo);
+            cust.lat = coords["lat"];
+            cust.lng = coords["lng"];
             db.SaveChanges();
         }
 
@@ -257,6 +255,7 @@ namespace TrashCollector.Controllers
 
         public void CreateCustomer(RegisterViewModel model)
         {
+            
             Customer cust = new Customer();
             cust.FirstName = model.firstName;
             cust.LastName = model.lastName;

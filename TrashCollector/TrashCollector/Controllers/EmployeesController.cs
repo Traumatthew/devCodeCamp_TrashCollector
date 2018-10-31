@@ -32,6 +32,7 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             var employee = db.Employees.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+            TempData["employee"] = employee;
             var customers = db.Customers.Where(x => x.Zip == employee.Zip).ToList();
             var custAcc = db.CustomerAccountDetails.Where(x => x.WeeklyPickUpDay == DateTime.Today.DayOfWeek.ToString()).ToList();
             List<Customer> customersL = db.Customers.ToList();
@@ -79,17 +80,31 @@ namespace TrashCollector.Controllers
 
         public ActionResult CustomerAccounts()
         {
+            Employee employee = (Employee)TempData["employee"];
             var accounts = db.CustomerAccountDetails.ToList();
-            var customers = db.Customers.ToList();
-            CustomerAndAccountViewModel view = new CustomerAndAccountViewModel();
-            view.accounts = accounts;
-            view.customers = customers;
-            return View(view);
+            var customers = db.Customers.Where(x => x.Zip == employee.Zip).ToList();
+            List<CustomerAccountDetails> filteredAccounts = new List<CustomerAccountDetails>();
+            foreach(var cust in customers)
+            {
+                foreach(var acc in accounts)
+                {
+                    if(acc.CustomerId == cust.ID)
+                    {
+                        filteredAccounts.Add(acc);
+                    }
+                }
+            }
+            GeoLocations Geo = new GeoLocations();
+            CustomerAndAccountViewModel view = new CustomerAndAccountViewModel() { accounts = filteredAccounts, customers = customers, geo = Geo };
+            EmployeeCustomerAccountsViewModel finalView = new EmployeeCustomerAccountsViewModel() { CustViewModel = view, emp = employee };
+            TempData["employee"] = employee;
+            return View(finalView);
         }
 
         [HttpPost]
-        public ActionResult CustomerAccounts(string[] days)
+        public ActionResult CustomerAccounts(string[] days, EmployeeCustomerAccountsViewModel finalView)
         {
+            
             var accounts = db.CustomerAccountDetails.ToList();
             var customers = db.Customers.ToList();
             List<CustomerAccountDetails> accResults = new List<CustomerAccountDetails>();
@@ -104,7 +119,6 @@ namespace TrashCollector.Controllers
                     }
                 }
             }
-
             foreach(var cust in customers)
             {
                 foreach(var acc in accResults)
@@ -115,10 +129,11 @@ namespace TrashCollector.Controllers
                     }
                 }
             }
-
-            CustomerAndAccountViewModel view = new CustomerAndAccountViewModel() { customers = custResults, accounts = accResults };
-
-            return View(view);
+            Employee employee = (Employee)TempData["employee"];
+            CustomerAndAccountViewModel view = new CustomerAndAccountViewModel() { customers = custResults, accounts = accResults, };
+            finalView.CustViewModel = view;
+            finalView.emp = employee;
+            return View(finalView);
         }
         // GET: Employees/Details/5
         public ActionResult Details(int? id)

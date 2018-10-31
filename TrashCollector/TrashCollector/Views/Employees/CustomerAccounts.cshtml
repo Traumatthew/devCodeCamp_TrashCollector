@@ -1,15 +1,17 @@
-﻿@model TrashCollector.Models.CustomerAndAccountViewModel
+﻿@model TrashCollector.Models.EmployeeCustomerAccountsViewModel
 
 @{
     ViewBag.Title = "CustomerAccounts";
 }
 @using (Html.BeginForm())
 {
+   
     <h2>CustomerAccounts</h2>
 
     <div class="container">
         <div class="row">
             <div class="col-md-6 table-responsive">
+
                 <table class="table table-hover col-md-6">
                     <thead class="thead-light">
                         <tr>
@@ -42,37 +44,40 @@
                         </tr>
                     </thead>
 
-                    @foreach (var item in Model.customers)
-                    {
+                  
+                        @for (int i = 0; i < Model.CustViewModel.customers.Count(); i++)
+                        {
+                            var item = Model.CustViewModel.customers[i];
+                            <tr class="addmarker" id=@i.ToString() data-lat="@item.lat" data-long="@item.lng">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Street)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.State)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Zip)
+                                </td>
 
+                            </tr>
                         
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FirstName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LastName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Phone)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Street)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.City)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.State)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Zip)
-                            </td>
 
-                        </tr>
+
                     }
                 </table>
                 <hr />
@@ -157,21 +162,43 @@
                                  }
                 </style>
                     <div id="map"></div>
-                    <script>
-                      var map;
+                    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+                    <script >
+                        var map;
+                        var markers = []
+                       
                         function initMap() {
-                            // The location of Uluru
-                           
-                            var uluru = { lat: 39.4831, lng: -88.3728 };
-                            // The map, centered at Uluru
-                            var map = new google.maps.Map(
-                                document.getElementById('map'), { zoom: 13, center: uluru });
-                            // The marker, positioned at Uluru
-                            var marker = new google.maps.Marker({ position: uluru, map: map });
+
+                            var uluru = { lat: @Model.emp.lat, lng: @Model.emp.lng };
+                            map = new google.maps.Map(
+                                document.getElementById('map'), { zoom: 11, center: uluru });
+                            markers = []; 
+                            var classname = document.getElementsByClassName("addmarker");
+                            for (var i = 0; i < classname.length; i++) {
+                                google.maps.event.addDomListener(document.getElementById(i.toString()), 'click', function (evt) {
+                                    console.log(markers);
+                                    for (var x = 0; x < markers.length; x++)
+                                    {
+                                        markers[x].setMap(null);
+                                    }
+                                    map.markers = [];
+                                    var lats = parseFloat(this.dataset.lat);
+                                    var long = parseFloat(this.dataset.long);
+                                    console.log(lats);
+                                    console.log(long);
+                                    var coords = { lat: lats, lng: long };
+                                    var marker2 = new google.maps.Marker({
+                                        position: coords,
+                                        map: map
+                                    });
+                                    markers.push(marker2);                             });
+                            }
+                          
                         }
+ 
+                        initMap();
                     </script>
-                    <script src=@Model.srcKey
-                            async defer></script>
+                    <script src=@Model.CustViewModel.srcKey async defer></script>
             </div>
         </div>
 

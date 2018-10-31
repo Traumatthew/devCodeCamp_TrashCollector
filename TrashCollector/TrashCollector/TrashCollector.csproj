@@ -281,12 +281,21 @@
     <Compile Include="Migrations\201810301925511_added lat and long attribute to employees.Designer.cs">
       <DependentUpon>201810301925511_added lat and long attribute to employees.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810302112596_added properties to customer table.cs" />
+    <Compile Include="Migrations\201810302112596_added properties to customer table.Designer.cs">
+      <DependentUpon>201810302112596_added properties to customer table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810311425484_added weekly table.cs" />
+    <Compile Include="Migrations\201810311425484_added weekly table.Designer.cs">
+      <DependentUpon>201810311425484_added weekly table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAccountDetails.cs" />
     <Compile Include="Models\CustomerAndAccountViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EmployeeCusomterAccountsViewModel.cs" />
     <Compile Include="Models\GeoLocations.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Key.cs" />
@@ -295,6 +304,7 @@
     <Compile Include="Models\PickUpsViewModel.cs" />
     <Compile Include="Models\RoleNames.cs" />
     <Compile Include="Models\Suspensions.cs" />
+    <Compile Include="Models\WeeklyPickups.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -477,6 +487,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810301925511_added lat and long attribute to employees.resx">
       <DependentUpon>201810301925511_added lat and long attribute to employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810302112596_added properties to customer table.resx">
+      <DependentUpon>201810302112596_added properties to customer table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810311425484_added weekly table.resx">
+      <DependentUpon>201810311425484_added weekly table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -18,5 +18,6 @@ namespace TrashCollector.Models
         public List<CustomerAccountDetails> accounts { get; set; }
         public string key = Key.GKey;
         public string srcKey = "https://maps.googleapis.com/maps/api/js?libraries=places&key=" + Key.GKey + "&callback=initMap";
+        public GeoLocations geo { get; set; }
     }
 }
