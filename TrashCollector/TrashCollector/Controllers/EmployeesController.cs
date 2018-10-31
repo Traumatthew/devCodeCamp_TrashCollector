@@ -38,6 +38,7 @@ namespace TrashCollector.Controllers
             List<Customer> customersL = db.Customers.ToList();
             PickUpsViewModel view = new PickUpsViewModel();
             List<Customer> results = new List<Customer>();
+            List<WeeklyPickups> pickupResults = new List<WeeklyPickups>();
             foreach (var account in custAcc)
             {
                 foreach (var cust in customers)
@@ -47,16 +48,34 @@ namespace TrashCollector.Controllers
                         bool check = CheckSuspensions(cust.ID);
                         if(check == false)
                         {
+                            CreateWeekly(cust.ID);
+                            var today = DateTime.Today.ToShortDateString();
+                            pickupResults.Add(db.WeeklyPickups.Where(x => x.CustomerId == cust.ID).Where(x => x.Date == today).FirstOrDefault());
                             results.Add(cust);
                         }
                     }
                 }
             }
             var special = db.PickUpRequests.Where(x => x.Date == DateTime.Today).ToList();
+            view.weeklypickups = pickupResults;
             view.standardPickups = results;
             view.specialPickups = special;
             view.customers = customersL;
             return View(view);
+        }
+
+        public void CreateWeekly(int id)
+        {
+            
+            WeeklyPickups wp = new WeeklyPickups();
+            wp.CustomerId = id;
+            wp.Date = DateTime.Today.ToShortDateString();
+            wp.Complete = false;
+            if (db.WeeklyPickups.Where(x => x.CustomerId == id).Where(x => x.Date == wp.Date).FirstOrDefault() == null)
+            {
+                db.WeeklyPickups.Add(wp);
+                db.SaveChanges();
+            }
         }
 
      
@@ -101,6 +120,26 @@ namespace TrashCollector.Controllers
             return View(finalView);
         }
 
+        public ActionResult ConfirmWeeklyPickup(int id)
+        {
+            var customer = db.Customers.Where(x => x.ID == id).FirstOrDefault();
+            var today = DateTime.Today.ToShortDateString();
+            var pickup = db.WeeklyPickups.Where(x => x.CustomerId == id).Where(x => x.Date == today).FirstOrDefault();
+            PickUpsViewModel pick = new PickUpsViewModel() { cust = customer, weeklypickup = pickup};
+            return View(pick);
+        }
+
+        [HttpPost]
+        public ActionResult ConfirmWeeklyPickup(int id, FormCollection form)
+        {
+            var today = DateTime.Today.ToShortDateString();
+            var custAccount = db.CustomerAccountDetails.Where(x => x.CustomerId == id).FirstOrDefault();
+            var pickup = db.WeeklyPickups.Where(x => x.CustomerId == id).Where(x => x.Date == today).FirstOrDefault();
+            pickup.Complete = true;
+            custAccount.MoneyOwed += 10;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public ActionResult CustomerAccounts(string[] days, EmployeeCustomerAccountsViewModel finalView)
         {

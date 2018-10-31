@@ -289,6 +289,10 @@
     <Compile Include="Migrations\201810311425484_added weekly table.Designer.cs">
       <DependentUpon>201810311425484_added weekly table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810311440020_changed weekly pickup date to string.cs" />
+    <Compile Include="Migrations\201810311440020_changed weekly pickup date to string.Designer.cs">
+      <DependentUpon>201810311440020_changed weekly pickup date to string.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -421,6 +425,7 @@
     <Content Include="Views\Customers\CancelSuspension.cshtml" />
     <Content Include="Views\Employees\PickupDetail.cshtml" />
     <Content Include="Views\Employees\CustomerAccounts.cshtml" />
+    <Content Include="Views\Employees\ConfirmWeeklyPickup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -493,6 +498,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810311425484_added weekly table.resx">
       <DependentUpon>201810311425484_added weekly table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810311440020_changed weekly pickup date to string.resx">
+      <DependentUpon>201810311440020_changed weekly pickup date to string.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

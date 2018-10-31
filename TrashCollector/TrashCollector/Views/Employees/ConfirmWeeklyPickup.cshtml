@@ -1,0 +1,36 @@
+﻿@model TrashCollector.Models.PickUpsViewModel
+
+@{
+    ViewBag.Title = "ConfirmWeeklyPickup";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h2>Confirm this Pickup?</h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.cust.Street)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.cust.Street)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.weeklypickup.Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.weeklypickup.Date)
+            </dd>
+        </dl>
+    </div>
+
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Confirm" class="btn btn-default" /> |
+        @Html.ActionLink("Cancel", "Index")
+    </div>
+}

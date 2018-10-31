@@ -15,7 +15,7 @@ namespace TrashCollector.Models
         [Display(Name = "Customer Id")]
         public int CustomerId { get; set; }
         public Customer Customers { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public bool Complete { get; set; }
     }
 }
