@@ -4,7 +4,7 @@
     ViewBag.Title = "CreateSpecialPickup";
 }
 
-<h2>Create Special Pickup</h2>
+<h2 class="text-light">Create Special Pickup</h2>
 
 
 @using (Html.BeginForm()) 
@@ -18,11 +18,11 @@
         
    
         <div class="form-group">
-            @Html.HiddenFor(model => model.PickUpId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(model => model.PickUpId, htmlAttributes: new { @class = "control-label col-md-2 rounded" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-1 bg-dark text-light rounded" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
@@ -30,7 +30,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Date, "Date :", new { style = "display:inline;", @class="control-label col-md-2" })
+            @Html.LabelFor(m => m.Date, "Date :", new { style = "display:inline;", @class= "control-label col-md-1 bg-dark text-light rounded" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(m => m.Date, "", new {@class = "text-danger" })
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-1 bg-dark text-light rounded" })
             <div class="col-md-10">
                 @Html.DropDownList("Times", new List<SelectListItem>
            {
@@ -58,7 +58,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.notes, htmlAttributes: new { @class = "control-label col-md-2 text-light rounded bg-dark" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.notes, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
@@ -67,7 +67,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-outline-light bg-danger text-light CustomerButton" />
             </div>
         </div>
     </div>

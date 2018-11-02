@@ -4,7 +4,7 @@
     ViewBag.Title = "Initial";
 }
 
-<h2>Inital</h2>
+<h2 class="text-light textGeogia">Inital Setup</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,27 +12,27 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>CustomerAccountDetails</h4>
+        <h4 class="text-light">Customer Account Details</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WeeklyPickUpDay, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.WeeklyPickUpDay, htmlAttributes: new { @class = "control-label col-md-2 bg-dark text-light rounded" })
             <div class="col-md-10">
-                <label>Monday</label>
+                <label class="text-light">Monday</label>
                 @Html.RadioButtonFor(x => x.WeeklyPickUpDay, "Monday")<br />
-                <label>Tuesday</label>
+                <label class="text-light">Tuesday</label>
                 @Html.RadioButtonFor(x => x.WeeklyPickUpDay, "Tuesday")<br />
-                <label>Wednesday</label>
+                <label class="text-light">Wednesday</label>
                 @Html.RadioButtonFor(x => x.WeeklyPickUpDay, "Wednesday")<br />
-                <label>Thursday</label>
+                <label class="text-light">Thursday</label>
                 @Html.RadioButtonFor(x => x.WeeklyPickUpDay, "Thursday")<br />
-                <label>Friday</label>
+                <label class="text-light">Friday</label>
                 @Html.RadioButtonFor(x => x.WeeklyPickUpDay, "Friday")<br />
-                <label>Saturday</label>
+                <label class="text-light">Saturday</label>
                 @Html.RadioButtonFor(x => x.WeeklyPickUpDay, "Saturday")<br />
-                <label>Sunday</label>
+                <label class="text-light">Sunday</label>
                 @Html.RadioButtonFor(x => x.WeeklyPickUpDay, "Sunday")
             </div>
         </div>
@@ -40,7 +40,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-outline-primary btn-lg bg-danger text-light CustomerButton" />
             </div>
         </div>
     </div>

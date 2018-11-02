@@ -4,7 +4,7 @@
     ViewBag.Title = "CreateSuspension";
 }
 
-<h2>Create Suspension</h2>
+<h2 class="text-light">Create Suspension</h2>
 
 
 @using (Html.BeginForm()) 
@@ -17,7 +17,7 @@
        
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2 bg-dark text-light rounded" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2 bg-dark text-light rounded" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-outline-light btn-lg bg-danger text-light CustomerButton" />
             </div>
         </div>
     </div>

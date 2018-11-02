@@ -6,50 +6,50 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <h2>Confirm PickUp</h2>
+    <h2 class="text-light">Confirm PickUp</h2>
 
-    <h3>Are you sure you want to create this special pickup?</h3>
+    <h3 class="text-light">Are you sure you want to create this special pickup?</h3>
     <div>
         <hr />
         <dl class="dl-horizontal">
 
-            <dt>
+            <dt class="text-light bg-dark rounded col-md-1">
                 @Html.DisplayNameFor(model => model.Place)
             </dt>
 
-            <dd>
+            <dd class="text-light" >
                 @Html.DisplayFor(model => model.Place)
             </dd>
 
-            <dt>
+            <dt class="text-light bg-dark rounded col-md-1">
                 @Html.DisplayNameFor(model => model.Date)
             </dt>
 
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.Date)
             </dd>
 
-            <dt>
+            <dt class="text-light bg-dark rounded col-md-1">
                 @Html.DisplayNameFor(model => model.Time)
             </dt>
 
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.Time)
             </dd>
 
-            <dt>
+            <dt class="text-light bg-dark rounded col-md-1">
                 @Html.DisplayNameFor(model => model.Fee)
             </dt>
 
-            <dd>
+            <dd class="text-light"> 
                 $ @Html.DisplayFor(model => model.Fee)
             </dd>
 
-            <dt>
+            <dt class="text-light bg-dark rounded col-md-2">
                 @Html.DisplayNameFor(model => model.notes)
             </dt>
 
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.notes)
             </dd>
 
@@ -58,7 +58,7 @@
 
 
         <div class="form-actions no-color">
-            <input type="submit" value="Create" class="btn btn-default" /> |
+            <input type="submit" value="Create" class="btn btn-outline-light btn-lg bg-danger text-light CustomerButton" /> |
             @Html.ActionLink("Cancel", "Index")
         </div>
         

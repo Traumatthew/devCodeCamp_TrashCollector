@@ -57,9 +57,20 @@ namespace TrashCollector.Controllers
                 }
             }
             var special = db.PickUpRequests.Where(x => x.Date == DateTime.Today).ToList();
+            List<PickUpRequests> filteredPickups = new List<PickUpRequests>();
+            foreach(var item in special)
+            {
+                foreach(var cust in customers)
+                {
+                    if(cust.ID == item.CustomerId)
+                    {
+                        filteredPickups.Add(item);
+                    }
+                }
+            }
             view.weeklypickups = pickupResults;
             view.standardPickups = results;
-            view.specialPickups = special;
+            view.specialPickups = filteredPickups;
             view.customers = customersL;
             return View(view);
         }
@@ -143,9 +154,10 @@ namespace TrashCollector.Controllers
         [HttpPost]
         public ActionResult CustomerAccounts(string[] days, EmployeeCustomerAccountsViewModel finalView)
         {
-            
+            var currentEmployee = db.Employees.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+            var customers = db.Customers.Where(x => x.Zip == currentEmployee.Zip).ToList();
+
             var accounts = db.CustomerAccountDetails.ToList();
-            var customers = db.Customers.ToList();
             List<CustomerAccountDetails> accResults = new List<CustomerAccountDetails>();
             List<Customer> custResults = new List<Customer>();
             foreach(var day in days)

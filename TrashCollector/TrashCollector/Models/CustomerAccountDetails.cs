@@ -12,10 +12,13 @@ namespace TrashCollector.Models
         [Key]
         public int CustomerAccountId { get; set; }
 
+
         [ForeignKey("Customers")]
         [Display(Name = "Customer Id")]
         public int CustomerId { get; set; }
         public Customer Customers { get; set; }
+
+
         public double MoneyOwed { get; set; }
         [Display(Name = "Weekly Pickup Day")]
         public string WeeklyPickUpDay { get; set; }

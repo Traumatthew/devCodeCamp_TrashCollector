@@ -4,52 +4,52 @@
     ViewBag.Title = "PickupDetail";
 }
 
-<h2>Pickup Detail</h2>
+<h2 class="text-light textGeogia">Pickup Detail</h2>
 @using (Html.BeginForm())
 {
     <div>
-        <h4>Mark this pickup as complete?</h4>
+        <h4 class="text-light">Mark this pickup as complete?</h4>
         <hr />
         <dl class="dl-horizontal">
 
 
-            <dt>
+            <dt class="bg-dark text-light rounded col-md-1">
                 @Html.DisplayNameFor(model => model.Place)
             </dt>
 
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.Place)
             </dd>
 
-            <dt>
+            <dt class="bg-dark text-light rounded col-md-1">
                 @Html.DisplayNameFor(model => model.Date)
             </dt>
 
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.Date)
             </dd>
 
-            <dt>
+            <dt class="bg-dark text-light rounded col-md-1">
                 @Html.DisplayNameFor(model => model.Time)
             </dt>
 
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.Time)
             </dd>
 
-            <dt>
+            <dt class="bg-dark text-light rounded col-md-1">
                 @Html.DisplayNameFor(model => model.Fee)
             </dt>
 
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.Fee)
             </dd>
 
-            <dt>
+            <dt class="bg-dark text-light rounded col-md-2">
                 @Html.DisplayNameFor(model => model.notes)
             </dt>
 
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.notes)
             </dd>
 
@@ -57,7 +57,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Complete" class="btn btn-default" />
+            <input type="submit" value="Complete" class="btn btn-outline-light bg-danger text-light CustomerButton" />
             @Html.ActionLink("Cancel", "Index")
         </div>
     </div>

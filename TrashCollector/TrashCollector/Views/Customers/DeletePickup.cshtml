@@ -4,60 +4,60 @@
     ViewBag.Title = "DeletePickup";
 }
 
-<h2>Delete Pickup</h2>
+<h2 class="text-light">Delete Pickup</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3 class="text-light">Are you sure you want to delete this?</h3>
 <div>
 
     <hr />
     <dl class="dl-horizontal">
 
 
-        <dt>
+        <dt class = "bg-dark text-light col-md-1 rounded">
             @Html.DisplayNameFor(model => model.Place)
         </dt>
 
-        <dd>
+        <dd class="text-light">
             @Html.DisplayFor(model => model.Place)
         </dd>
 
-        <dt>
+        <dt class = "bg-dark text-light col-md-1 rounded">
             @Html.DisplayNameFor(model => model.Date)
         </dt>
 
-        <dd>
+        <dd class="text-light">
             @Html.DisplayFor(model => model.Date)
         </dd>
 
-        <dt>
+        <dt class = "bg-dark text-light col-md-1 rounded">
             @Html.DisplayNameFor(model => model.Time)
         </dt>
 
-        <dd>
+        <dd class="text-light">
             @Html.DisplayFor(model => model.Time)
         </dd>
 
-        <dt>
+        <dt class = "bg-dark text-light col-md-1 rounded">
             @Html.DisplayNameFor(model => model.Fee)
         </dt>
 
-        <dd>
+        <dd class="text-light">
             @Html.DisplayFor(model => model.Fee)
         </dd>
 
-        <dt>
+        <dt class = "bg-dark text-light col-md-1 rounded">
             @Html.DisplayNameFor(model => model.complete)
         </dt>
 
-        <dd>
+        <dd class="text-light">
             @Html.DisplayFor(model => model.complete)
         </dd>
 
-        <dt>
+        <dt class = "bg-dark text-light col-md-2 rounded">
             @Html.DisplayNameFor(model => model.notes)
         </dt>
 
-        <dd>
+        <dd class="text-light">
             @Html.DisplayFor(model => model.notes)
         </dd>
 
@@ -67,7 +67,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-outline-light btn-lg bg-danger text-light CustomerButton" /> |
             @Html.ActionLink("Cancel", "Index")
         </div>
     }

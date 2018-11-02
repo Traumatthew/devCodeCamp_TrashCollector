@@ -6,23 +6,23 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <h2>Confirm this Pickup?</h2>
+    <h2 class="text-light textGeogia">Confirm this Pickup?</h2>
 
     <div>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
+            <dt class="bg-dark text-light rounded col-md-1">
                 @Html.DisplayNameFor(model => model.cust.Street)
             </dt>
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.cust.Street)
             </dd>
 
-            <dt>
+            <dt class="bg-dark text-light rounded col-md-1">
                 @Html.DisplayNameFor(model => model.weeklypickup.Date)
             </dt>
 
-            <dd>
+            <dd class="text-light">
                 @Html.DisplayFor(model => model.weeklypickup.Date)
             </dd>
         </dl>
@@ -30,7 +30,7 @@
 
 
     <div class="form-actions no-color">
-        <input type="submit" value="Confirm" class="btn btn-default" /> |
+        <input type="submit" value="Confirm" class="btn btn-outline-light bg-danger text-light CustomerButton" /> |
         @Html.ActionLink("Cancel", "Index")
     </div>
 }

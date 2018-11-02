@@ -7,24 +7,23 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <style>       
-        html {
-            background: url('~/Images/garbage.jpg')
-        }
-    </style>
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+
 </head>
 <body>
-    <div class="navbar navbar-expand-md navbar-dark  navbar-fixed-top">
+    <div class="navbar navbar-expand-md navbar-dark navbar-fixed-top">
         @{
             if (User.IsInRole("Customer"))
             {
                 <div class="container text-light">
-                    <div class="navbar-header">
+                    <div class="navbar-header NavButtons">
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         </button>
-                        @Html.ActionLink("Trash Collector", "Index", "Customer", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Global Collect", "Index", "Customers", new { area = "" }, new { @class = "text-light pr-4" })
                     </div>
-                    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <div class="navbar-collapse collapse NavButtons" id="navbarSupportedContent">
                         <ul class="nav navbar-nav mr-auto">
                             <li class="nav-item pr-3">@Html.ActionLink("Profile", "Index", "Customers", null, new {@class="text-light" })</li>
                         </ul>
@@ -37,11 +36,11 @@
             else if (User.IsInRole("Employee"))
             {
                 <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
-                        @Html.ActionLink("Trash Collector", "Index", "Employees", new { area = "" }, new { @class = "navbar-brand" })
+                    <div class="navbar-header EmployeeNavButtons">                        
+                        <button type="button" class="navbar-toggler EmployeeNavButtons" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+                        @Html.ActionLink("Global Collect", "Index", "Employees", new { area = "" }, new { @class = "text-light pr-4 EmployeeNavButtons" })
                     </div>
-                    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <div class="navbar-collapse collapse EmployeeNavButtons" id="navbarSupportedContent">
                         <ul class="nav navbar-nav mr-auto">
                             <li class="nav-item pr-3">@Html.ActionLink("Pickup", "Index", "Employees", null, new { @class = "text-light" })</li>
                             <li class="nav-item">@Html.ActionLink("Customer Accounts", "CustomerAccounts", "Employees", null, new { @class = "text-light" })</li>
@@ -55,15 +54,14 @@
             else
             {
                 <div class="container">
-                    <div class="navbar-header">
+                    <div class="navbar-header NavButtons">
+
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
-                        @Html.ActionLink("Trash Collector", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     </div>
-                    <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav  mr-auto">
-                            <li class="nav-item pr-3">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "text-light" })</li>
-                            <li class="nav-item pr-3">@Html.ActionLink("About", "About", "Home", null, new { @class = "text-light" })</li>
-                            <li class="nav-item pr-3">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "text-light" })</li>
+                    <div class="navbar-collapse collapse NavButtons" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav  mr-auto list-inline">
+                            <li class="nav-item pr-3">@Html.ActionLink("Global Collect", "Index", "Home", null, new { @class = "text-light" })</li>
+    
                         </ul>
                         @Html.Partial("_LoginPartial")
                     </div>
@@ -73,8 +71,8 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
+        <hr class="text-light"/>
+        <footer class="text-light">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>

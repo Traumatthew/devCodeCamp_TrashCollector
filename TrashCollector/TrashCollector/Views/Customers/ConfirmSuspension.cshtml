@@ -4,27 +4,27 @@
     ViewBag.Title = "ConfirmSuspension";
 }
 
-<h2>Confirm Suspension</h2>
+<h2 class="text-light">Confirm Suspension</h2>
 
-<h3>Are you sure you want to create this suspension?</h3>
+<h3 class="text-light">Are you sure you want to create this suspension?</h3>
 <div>
 
     <hr />
     <dl class="dl-horizontal">
      
-        <dt>
+        <dt class="bg-dark text-light col-md-2 rounded">
             @Html.DisplayNameFor(model => model.StartDate)
         </dt>
 
-        <dd>
+        <dd class="text-light">
             @Html.DisplayFor(model => model.StartDate)
         </dd>
 
-        <dt>
+        <dt class="bg-dark text-light col-md-2 rounded">
             @Html.DisplayNameFor(model => model.EndDate)
         </dt>
 
-        <dd>
+        <dd class="text-light">
             @Html.DisplayFor(model => model.EndDate)
         </dd>
 
@@ -34,7 +34,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Create" class="btn btn-default" /> |
+            <input type="submit" value="Create" class="btn btn-outline-light btn-lg bg-danger text-light CustomerButton" /> |
             @Html.ActionLink("Cancel", "Index")
         </div>
     }

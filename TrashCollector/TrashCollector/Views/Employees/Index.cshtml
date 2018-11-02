@@ -4,15 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Today's Pickups</h2>
+<h2 class="text-light textGeogia">Today's Pickups</h2>
+<link href="~/Content/Site.css" rel="stylesheet" />
 
-
-<label>
+<label class="text-light">
     Standard Pickups
 </label>
-<table class="table">
+<table class="table bg-dark text-light">
     <thead class="thead-light">
-        <tr>
+        <tr class="rounded-top" style="background-color: black" id="RowHeader">
             <th>
                 @Html.DisplayName("First Name")
             </th>
@@ -64,7 +64,7 @@
             @if (Model.weeklypickups.Where(x => x.CustomerId == item.ID).Select(x => x.Complete).FirstOrDefault() == false)
             {
                 <td>
-                    <input type="button" class=" btn btn-outline-primary ml-auto" value="Complete" onclick="location.href='@Url.Action("ConfirmWeeklyPickup", "Employees", new { id = item.ID})'" />
+                    <input type="button" class="btn btn-outline-light bg-danger text-light CustomerButton" value="Complete" onclick="location.href='@Url.Action("ConfirmWeeklyPickup", "Employees", new { id = item.ID})'" />
                 </td>
             }
         </tr>
@@ -74,10 +74,10 @@
 </table>
 
 <hr />
-<label>
+<label class="text-light">
     Special Pickups
 </label>
-<table class="table table-hover">
+<table class="table table-hover bg-dark text-light ">
     <thead class="thead-light">
         <tr>
             <th>
@@ -136,7 +136,7 @@
                 <td>
                     @if (item.complete == false)
                     {
-                        <input type="button" class=" btn btn-outline-primary ml-auto" value="Complete" onclick="location.href='@Url.Action("PickupDetail", "Employees", new { id = item.PickUpId})'" />
+                        <input type="button" class="btn btn-outline-light bg-danger text-light CustomerButton" value="Complete" onclick="location.href='@Url.Action("PickupDetail", "Employees", new { id = item.PickUpId})'" />
                     }
                 </td>
             </tr>

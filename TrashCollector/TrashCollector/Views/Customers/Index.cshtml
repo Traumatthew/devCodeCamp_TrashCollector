@@ -4,45 +4,44 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container mt-3 mb-3">
+<div class="container mt-3 mb-3 text-light textGeogia">
     <h2>
         Welcome @Html.DisplayFor(model => model.cust.FirstName)
         @Html.DisplayFor(model => model.cust.LastName)
     </h2>
 </div>
-<div class="container">
+<div class="container bg-dark text-light rounded-top">
     <div class="text-center">
-        <h2>
-                Account Summary
+        <h2 class="text-light">
+          Account Summary
         </h2>
         <br />
     </div>
 </div>
-<hr />
-<div class="container">
+<div class="container bg-light border border-warning border-top-0 border-thick rounded-bottom">
     <div class="row">
-        <div class="col-md-3 border-right border-left ml-auto">
-            <label class="font-weight-bold">
-                Address:
+        <div class="col-md-3 border-right  border-left ml-auto">
+            <label class="font-weight-bold bg-dark text-light rounded mt-2">
+                Address
             </label>
             <p>
                 @Model.cust.Street,  @Model.cust.State,  @Model.cust.Zip<br />
             </p>
-            <label class="font-weight-bold">
-                Pick Up Day:
+            <label class="font-weight-bold bg-dark text-light rounded">
+                Pick Up Day
             </label>
             <p>
                 @Model.account.WeeklyPickUpDay
             </p>
-            <label class="font-weight-bold">
-                Current Bill:
+            <label class="font-weight-bold bg-dark text-light rounded ">
+                Current Bill
             </label>
             <p>
                 $ @Model.account.MoneyOwed
             </p>
         </div>
         <div class="col-md-3">
-            <label class="font-weight-bold text-center">
+            <label class="font-weight-bold text-center bg-dark text-light rounded mt-2">
                 Scheduled Special Pickups
             </label>
             <p>
@@ -84,7 +83,7 @@
             </p>
         </div>
         <div class="col-md-3  border-right border-left mr-auto">
-            <label class="font-weight-bold text-center">
+            <label class="font-weight-bold text-center bg-dark text-light rounded mt-2">
                 Scheduled Suspensions
             </label>
             <p>
@@ -115,17 +114,18 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container mt-3">
     <div class="row">
         <div class="col-md-3 ml-auto text-center">
-            <input type="button" class=" btn btn-outline-primary btn-lg ml-auto" value="Edit Profile" onclick="location.href='@Url.Action("EditProfile", "Customers")'" />
+            <input type="button" class=" btn btn-outline-light btn-lg ml-auto bg-danger text-light" value="Edit Profile" onclick="location.href='@Url.Action("EditProfile", "Customers", new { @class = "CustomerButton"})'" />
         </div>
         <div class="col-md-3 text-center">
-            <input type="button" class="btn btn-outline-primary btn-lg" value="Add Pickup" onclick="location.href='@Url.Action("CreateSpecialPickup", "Customers")'" />
+            <input type="button" class="btn btn-outline-light btn-lg bg-danger text-light" value="Add Pickup" onclick="location.href='@Url.Action("CreateSpecialPickup", "Customers", new { @class = "CustomerButton"})'" />
         </div>
         <div class="col-md-3 mr-auto text-center">
-            <input type="button" class="btn btn-outline-primary btn-lg" value="Suspend Service" onclick="location.href='@Url.Action("CreateSuspension", "Customers")'" />
+            <input type="button" class="btn btn-outline-light btn-lg bg-danger text-light CustomerButton" value="Suspend Service" onclick="location.href='@Url.Action("CreateSuspension", "Customers", new { @class = "CustomerButton"})'" />
         </div>
     </div>
 </div>
 
+<link href="~/Content/Site.css" rel="stylesheet" />
